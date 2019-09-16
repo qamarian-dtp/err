@@ -6,6 +6,7 @@ import (
 	"testing"
 )
 
+// TestError () tests the data type "Error".
 func TestError (t *testing.T) {
 	str.PrintEtr ("Testing data type 'Error' ...", "std", "TestError ()")
 

@@ -18,7 +18,13 @@ type Error struct {
 //
 // Input 2: The error's type.
 //
-// 	someErr := err.New ("File could not be opened.", 1, 1, errors.New ("Error foo."))
+// Input 3: If the error you are creating is caused by another error, this value could be
+// that error which caused the error you are creating. For example, if you want to create
+// error A (File could not be opened.). And error A was caued by error B (File does not
+// exist.). Then the value of this input could be error B. If error A is not caused by any
+// error, you should skip this input.
+//
+// 	someErr := err.New ("File could not be opened.", 36, 8, errors.New ("Error foo."))
 func New (errString string, errClass, errType int, errCause ... error) (*Error) {
 	var cause error
 
