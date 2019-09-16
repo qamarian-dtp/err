@@ -26,7 +26,9 @@ func TestError (t *testing.T) {
 		str.PrintEtr ("Test has failed. Ref: 3", "err", "TestError ()")
 		t.Fail ()
 	}
-	if someErr.Unwrap () != errCause {
+
+	var err3 error = someErr
+	if errors.Unwrap (err3) != errCause {
 		str.PrintEtr ("Test has failed. Ref: 5", "err", "TestError ()")
 		t.Fail ()
 	}
