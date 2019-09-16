@@ -6,7 +6,7 @@ type Error struct {
 	errString string
 	errClass int
 	errType int
-	errCause error
+	secondary error
 }
 
 // New () creates a new data of this type. Always use this function, when you want to
@@ -25,15 +25,15 @@ type Error struct {
 // error, you should skip this input.
 //
 // 	someErr := err.New ("File could not be opened.", 36, 8, errors.New ("Error foo."))
-func New (errString string, errClass, errType int, errCause ... error) (*Error) {
-	var cause error
+func New (errString string, errClass, errType int, secondary ... error) (*Error) {
+	var sec error
 
-	if len (errCause) > 0 {
-		cause = errCause [0]
+	if len (secondary) > 0 {
+		sec = secondary [0]
 	} else {
-		cause = nil
+		sec = nil
 	}
-	return &Error {errString, errClass, errType, cause}
+	return &Error {errString, errClass, errType, sec}
 }
 
 // Error () returns the description of the error.
@@ -53,5 +53,5 @@ func (err *Error) Type () (int) {
 
 // Unwrap () returns the cause of the error.
 func (err *Error) Unwrap () (error) {
-	return err.errCause
+	return err.secondary
 }

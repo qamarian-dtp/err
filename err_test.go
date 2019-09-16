@@ -16,27 +16,27 @@ func TestError (t *testing.T) {
 
 	if someErr.Error () != errDescp {
 		str.PrintEtr ("Test has failed. Ref: 1", "err", "TestError ()")
-		t.Fail ()
+		t.FailNow ()
 	}
 	if someErr.Class () != 9 {
 		str.PrintEtr ("Test has failed. Ref: 2", "err", "TestError ()")
-		t.Fail ()
+		t.FailNow ()
 	}
 	if someErr.Type () != 15 {
 		str.PrintEtr ("Test has failed. Ref: 3", "err", "TestError ()")
-		t.Fail ()
+		t.FailNow ()
 	}
 
 	var err3 error = someErr
 	if errors.Unwrap (err3) != errCause {
 		str.PrintEtr ("Test has failed. Ref: 5", "err", "TestError ()")
-		t.Fail ()
+		t.FailNow ()
 	}
 
 	err2 := New (errDescp, 1, 2)
 	if err2.Unwrap () != nil {
 		str.PrintEtr ("Test has failed. Ref: 6", "err", "TestError ()")
-		t.Fail ()
+		t.FailNow ()
 	}
 
 	str.PrintEtr ("Data type 'Error' passed test!", "std", "TestError ()")
