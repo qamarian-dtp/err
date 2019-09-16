@@ -24,7 +24,8 @@ type Error struct {
 // exist.). Then the value of this input could be error B. If error A is not caused by any
 // error, you should skip this input.
 //
-// 	someErr := err.New ("File could not be opened.", 36, 8, errors.New ("Error foo."))
+// 	someErr := err.New ("File could not be opened.", 36, 8,
+//		errors.New ("File does not exist."))
 func New (errString string, errClass, errType int, secondary ... error) (*Error) {
 	var sec error
 
@@ -51,7 +52,7 @@ func (err *Error) Type () (int) {
 	return err.errType
 }
 
-// Unwrap () returns the cause of the error.
+// Unwrap () returns the secondary of the error.
 func (err *Error) Unwrap () (error) {
 	return err.secondary
 }
