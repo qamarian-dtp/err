@@ -37,22 +37,33 @@ func New (errString string, errClass, errType int, secondary ... error) (*Error)
 	return &Error {errString, errClass, errType, sec}
 }
 
+// Secondary () sets the secondary of the error. If the secondary of the error has not
+// been set, this method sets it and returns true. However, if the secondary of the error
+// has been set, this method does not update the secondary and returns false.
+func (e *Error) SetSecondary (err error) (bool) {
+	if e.secondary == nil {
+		e.secondary = err
+		return true
+	}
+	return false
+}
+
 // Error () returns the description of the error.
-func (err *Error) Error () (string) {
-	return err.errString
+func (e *Error) Error () (string) {
+	return e.errString
 }
 
 // Class () returns the class of the error.
-func (err *Error) Class () (int) {
-	return err.errClass
+func (e *Error) Class () (int) {
+	return e.errClass
 }
 
 // Type () returns the type of the error.
-func (err *Error) Type () (int) {
-	return err.errType
+func (e *Error) Type () (int) {
+	return e.errType
 }
 
 // Unwrap () returns the secondary of the error.
-func (err *Error) Unwrap () (error) {
-	return err.secondary
+func (e *Error) Unwrap () (error) {
+	return e.secondary
 }
