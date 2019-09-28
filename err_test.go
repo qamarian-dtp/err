@@ -65,25 +65,5 @@ func TestError (t *testing.T) {
 	}
 	// ... }
 
-	// Testing method SetSecondary () ... {
-	secA := errors.New ("Some secondary.")
-	errA := New ("0", 0, 0, secA)
-	errB := New ("0", 0, 0)
-	secB := errors.New ("Some other secondary.")
-
-	if errA.SetSecondary (secB) != false {
-		str.PrintEtr ("Test has failed. Ref: 6", "err", "TestError ()")
-		t.FailNow ()
-	}
-	if errA.Unwrap () != secA {
-		str.PrintEtr ("Test has failed. Ref: 7", "err", "TestError ()")
-		t.FailNow ()
-	}
-	if errB.SetSecondary (secB) != true {
-		str.PrintEtr ("Test has failed. Ref: 8", "err", "TestError ()")
-		t.FailNow ()
-	}
-	// ... }
-
 	str.PrintEtr ("Data type 'Error' passed test!", "std", "TestError ()")
 }
