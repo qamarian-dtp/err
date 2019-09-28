@@ -22,27 +22,12 @@ func TestError (t *testing.T) {
 	}
 	// ... }
 
-	// Testing method SetSecondary () ... {
-	errA := New ("0", 0, 0, errors.New ("Some secondary."))
-	errB := New ("0", 0, 0)
-	secA := errors.New ("Some other secondary.")
-
-	if errA.SetSecondary (secA) == true {
-		str.PrintEtr ("Test has failed. Ref: 1", "err", "TestError ()")
-		t.FailNow ()
-	}
-	if errB.SetSecondary (secA) == false {
-		str.PrintEtr ("Test has failed. Ref: 2", "err", "TestError ()")
-		t.FailNow ()
-	}
-	// ... }
-
 	// Testing method Error () ... {
 	desc := "Some error description."
 	errC := New (desc, 0, 0)
 
 	if errC.Error () != desc {
-		str.PrintEtr ("Test has failed. Ref: 3", "err", "TestError ()")
+		str.PrintEtr ("Test has failed. Ref: 1", "err", "TestError ()")
 		t.FailNow ()
 	}
 	// ... }
@@ -51,7 +36,7 @@ func TestError (t *testing.T) {
 	errD := New ("0", 1, 2)
 
 	if errD.Class () != 1 {
-		str.PrintEtr ("Test has failed. Ref: 4", "err", "TestError ()")
+		str.PrintEtr ("Test has failed. Ref: 2", "err", "TestError ()")
 		t.FailNow ()
 	}
 	// ... }
@@ -60,7 +45,7 @@ func TestError (t *testing.T) {
 	errE := New ("0", 1, 2)
 
 	if errE.Type () != 2 {
-		str.PrintEtr ("Test has failed. Ref: 5", "err", "TestError ()")
+		str.PrintEtr ("Test has failed. Ref: 3", "err", "TestError ()")
 		t.FailNow ()
 	}
 	// ... }
@@ -71,11 +56,31 @@ func TestError (t *testing.T) {
 	errY := New ("0", 0, 0)
 
 	if errX.Unwrap () != secX {
-		str.PrintEtr ("Test has failed. Ref: 6", "err", "TestError ()")
+		str.PrintEtr ("Test has failed. Ref: 4", "err", "TestError ()")
 		t.FailNow ()
 	}
 	if errY.Unwrap () != nil {
+		str.PrintEtr ("Test has failed. Ref: 5", "err", "TestError ()")
+		t.FailNow ()
+	}
+	// ... }
+
+	// Testing method SetSecondary () ... {
+	secA := errors.New ("Some secondary.")
+	errA := New ("0", 0, 0, secA)
+	errB := New ("0", 0, 0)
+	secB := errors.New ("Some other secondary.")
+
+	if errA.SetSecondary (secB) != false {
+		str.PrintEtr ("Test has failed. Ref: 6", "err", "TestError ()")
+		t.FailNow ()
+	}
+	if errA.Unwrap () != secA {
 		str.PrintEtr ("Test has failed. Ref: 7", "err", "TestError ()")
+		t.FailNow ()
+	}
+	if errB.SetSecondary (secB) != true {
+		str.PrintEtr ("Test has failed. Ref: 8", "err", "TestError ()")
 		t.FailNow ()
 	}
 	// ... }
