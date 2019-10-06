@@ -1,3 +1,4 @@
 # Err
-This package implements a data type representing a type of Golang error. See 
+
+Package err implements a Golang error data type. See 
 [GoDoc](https://godoc.org/github.com/qamarian-dtp/err) for details.

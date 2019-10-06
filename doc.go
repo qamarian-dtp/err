@@ -1,2 +1,2 @@
-// This package implements a data type which represents a Golang error.
+// Package err implements a Golang error data type.
 package err
