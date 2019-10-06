@@ -50,12 +50,22 @@ func (e *Error) Error () (string) {
 
 // Class () returns the class of the error.
 func (e *Error) Class () (*big.Int) {
-	return e.errClass
+	// The actual value of the error's class is not returned, to avoid it getting
+	// modified outside this package. Rather, a clone of the actual value of the
+	// error's class is returned.
+
+	output := big.NewInt (0)
+	return output.Add (output, e.errClass)
 }
 
 // Type () returns the type of the error.
 func (e *Error) Type () (*big.Int) {
-	return e.errType
+	// The actual value of the error's type is not returned, to avoid it getting
+	// modified outside this package. Rather, a clone of the actual value of the
+	// error's type is returned.
+
+	output := big.NewInt (0)
+	return output.Add (output, e.errType)
 }
 
 // Unwrap () returns the secondary of the error.
